@@ -41,6 +41,7 @@ declare module 'vue' {
     Header: typeof import('./src/components/Header.vue')['default']
     Line: typeof import('./src/components/Line.vue')['default']
     List: typeof import('./src/components/List.vue')['default']
+    LoadMoreItem: typeof import('./src/components/LoadMoreItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div class="layout" v-if="!store.showMore">
     <el-card class="top">
       <div class="container" v-if="!store.isShowAdd">
         <div class="left">
@@ -34,7 +34,7 @@
       <div class="container" v-if="!store.isShowAdd">
         <div class="nav">
           <h2>更新动态</h2>
-          <p>查看更多</p>
+          <p @click="showLoadMore">查看更多</p>
         </div>
         <div class="item" v-for="item in 15" :key="item">
           <div>
@@ -51,6 +51,7 @@
       </div>
     </el-card>
   </div>
+  <LoadMore v-else :showMore="store.showMore"/>
 </template>
 
 <script setup lang='ts'>
@@ -58,12 +59,16 @@ import UploadInvoice from "./UploadInvoice.vue";
 import Transfer from "./Transfer.vue";
 import Accomplish from "./Accomplish.vue";
 import {useStore} from '@/store/index'
+import LoadMore from "./LoadMore.vue";
 const store = useStore()
 //新增发票按钮
 function addInvoice(){
   store.$patch({
     isShowAdd:!store.isShowAdd
   })
+}
+function showLoadMore(){
+  store.showMore = true
 }
 </script>
 

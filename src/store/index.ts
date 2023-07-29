@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import {ref} from 'vue'
 export const useStore = defineStore('main', ()=>{
+    //是否展示查看更多页面
+    let showMore = ref(false)
     //控制菜单显示隐藏
     let collapse = ref(false)
     //控制首页是否是添加发票
@@ -14,6 +16,7 @@ export const useStore = defineStore('main', ()=>{
     return {
         collapse,
         invoiceInfo,
-        isShowAdd
+        isShowAdd,
+        showMore
     }
 })
