@@ -18,8 +18,7 @@
         </el-form-item>
       </el-form>
       <br />
-      <!--  @click="submitForm(ruleFormRef)" -->
-      <el-button type="primary">登录</el-button>
+      <el-button type="primary" @click="submitForm(ruleFormRef)">登录</el-button>
       </div>
     </el-card>
       </div>
@@ -30,11 +29,13 @@
 <script setup lang='ts'>
 import { User, Unlock } from '@element-plus/icons-vue'
 import type { FormInstance, FormRules } from 'element-plus'
-// import {useRouter} from 'vue-router'
+import {useRouter} from 'vue-router'
 import { ref, reactive } from 'vue'
-import { RuleForm} from '@/type/index'
+import { RuleForm} from '@/type/login'
+import {setToken} from '@/utils/storage'
+// import {LoginRes} from '@/type/login'
 // import { login } from '@/api/user'
-// const router = useRouter();
+const router = useRouter();
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive<RuleForm>({
   username: 'admin',
@@ -56,19 +57,21 @@ const rules = reactive<FormRules<RuleForm>>({
   ],
 });
 //登录按钮事件 
-// const submitForm = async (formEl: FormInstance | undefined) => {
-//   if (!formEl) return
-//   await formEl.validate(async (valid, fields) => {
-//     if (valid) {//表单校验成功走这里
-//       const res: LoginRes = await login(ruleForm);
-//       if (res.code == 20000) {
-//         router.push('/');
-//       }
-//     } else {
-//       console.log('用户名不正确!', fields)
-//     }
-//   })
-// }
+const submitForm = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate(async (valid, fields) => {
+    if (valid) {//表单校验成功走这里
+      // const res: LoginRes = await login(ruleForm);
+      // if (res.code == 20000) {
+      //   router.push('/');
+      // }
+      setToken('dasdadad')
+      router.push('/')
+    } else {
+      console.log('用户名不正确!', fields)
+    }
+  })
+}
 </script>
 
 <style lang="scss" scoped>

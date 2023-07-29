@@ -1,13 +1,14 @@
 <template>
   <div class="layout">
     <el-card class="top">
-      <div class="container">
+      <div class="container" v-if="!store.isShowAdd">
         <div class="left">
         <el-avatar :size="80" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
         <div>
           <h2>早安，赵莎莎，祝你开心每一天</h2>
           <p>项目主任 | 环城网络———综合办公室——运营中心</p>
         </div>
+        <el-button type="primary" @click="addInvoice">新增发票</el-button>
       </div>
       <div class="right">
         <div class="rLeft">
@@ -23,9 +24,14 @@
         </div>
       </div>
       </div>
+      <div class="add" v-else>
+        <h2>新增发票</h2>
+        <p>归档至成都环城网络科技有限公司项目数据库</p>
+        <el-button type="primary" @click="addInvoice">返回</el-button>
+      </div>
     </el-card>
     <el-card class="bottom">
-      <div class="container">
+      <div class="container" v-if="!store.isShowAdd">
         <div class="nav">
           <h2>更新动态</h2>
           <p>查看更多</p>
@@ -38,12 +44,27 @@
           <p>一小时前</p>
         </div>
       </div>
+      <div class="add" v-else>
+        <UploadInvoice v-if="store.invoiceInfo==1"/>
+        <Transfer v-else-if="store.invoiceInfo==2"/>
+        <Accomplish v-else/>
+      </div>
     </el-card>
   </div>
 </template>
 
 <script setup lang='ts'>
-import { } from "vue"
+import UploadInvoice from "./UploadInvoice.vue";
+import Transfer from "./Transfer.vue";
+import Accomplish from "./Accomplish.vue";
+import {useStore} from '@/store/index'
+const store = useStore()
+//新增发票按钮
+function addInvoice(){
+  store.$patch({
+    isShowAdd:!store.isShowAdd
+  })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -104,6 +125,13 @@ import { } from "vue"
       }
     }
     }
+    .add{
+      display: flex;
+      flex-direction: column;
+      p{
+        margin-top: 10px;
+      }
+    }
   }
 
   .bottom {
@@ -129,6 +157,10 @@ import { } from "vue"
           align-items: center;
         }
       }
+    }
+    .add{
+      display: flex;
+      justify-content: center;
     }
   }
 }</style>

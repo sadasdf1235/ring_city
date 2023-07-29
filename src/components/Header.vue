@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="left">
-            <el-icon :size="30" color="rgb(167, 171, 191)">
+            <el-icon :size="30" color="rgb(167, 171, 191)" @click="store.collapse = !store.collapse">
                 <Operation />
             </el-icon>
             <el-breadcrumb separator="/">
@@ -21,7 +21,7 @@
                 <template #dropdown>
                     <el-dropdown-menu>
                         <el-dropdown-item>个人中心</el-dropdown-item>
-                        <el-dropdown-item>登出</el-dropdown-item>
+                        <el-dropdown-item @click="logout">登出</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -30,6 +30,16 @@
 </template>
 
 <script setup lang='ts'>
+import {useRouter} from 'vue-router'
+import {removeToken} from '@/utils/storage'
+import {useStore} from '@/store/index'
+const router = useRouter()
+const store = useStore()
+//登出 清除token并且跳到登录页面
+function logout(){
+    removeToken()
+    router.replace('/login')
+}
 </script>
 
 <style lang="scss" scoped>
