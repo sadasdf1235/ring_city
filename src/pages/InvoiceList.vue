@@ -27,8 +27,9 @@
                     <div class="item">
                         <h3>基本类型</h3>
                         <div class="itemTab">
-                            <List first-name="发票种类" last-name="电子发票" />
-                            <List first-name="开票日期" last-name="电子发票" />
+                            <List first-name="发票种类" last-name="电子发票" @update-input-value="update"/>
+                            <p>{{ test }}</p>
+                            <List first-name="开票日期" />
                         </div>
                     </div>
                     <div class="item">
@@ -80,6 +81,7 @@ let form = reactive([
         date: '2021-02-19 11:00:00'
     }
 ])
+let test = ref("")
 function detail() {
     flag.value = 1
 }
@@ -91,6 +93,9 @@ function cancel(){
 }
 function save(){
     flag.value = 0
+}
+function update(value:string){
+    test.value = value
 }
 </script>
 

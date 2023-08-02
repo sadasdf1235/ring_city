@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import {ref} from 'vue'
+import {reactive, ref} from 'vue'
 export const useStore = defineStore('main', ()=>{
     //是否展示查看更多页面
     let showMore = ref(false)
@@ -17,6 +17,6 @@ export const useStore = defineStore('main', ()=>{
         collapse,
         invoiceInfo,
         isShowAdd,
-        showMore
+        showMore,
     }
 })
